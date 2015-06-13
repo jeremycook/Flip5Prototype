@@ -197,6 +197,7 @@
     <Content Include="static\font-awesome-4.3.0\scss\_stacked.scss" />
     <Content Include="static\font-awesome-4.3.0\scss\_variables.scss" />
     <Content Include="Areas\CleanBlog\Readme.md" />
+    <Content Include="static\Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
