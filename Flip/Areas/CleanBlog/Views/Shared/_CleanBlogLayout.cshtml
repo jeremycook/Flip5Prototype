@@ -10,13 +10,18 @@
 
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="~/static/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    @* HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+        WARNING: Respond.js doesn't work if you view the page via file:// *@
     <!--[if lt IE 9]>
     <script src="~/static/html5shiv-3.7.3/html5shiv.min.js"></script>
     <script src="~/static/respond-1.4.2/respond.min.js"></script>
     <![endif]-->
+    @* IE9 and below have some pretty bad bugs in their implementation of defer such that the execution order isn’t guarenteed. If you need to support <= IE9 I recommend not using defer at all and include your scripts with no attribute if the execution order matters. See https://github.com/h5bp/lazyweb-requests/issues/42 *@
+    <script src="~/static/jquery-2.1.4/jquery-2.1.4.min.js" defer></script>
+    <script src="~/static/bootstrap-3.3.4/js/bootstrap.min.js" defer></script>
+    <script src="~/static/clean-blog-1.0.3/js/clean-blog.min.js" defer></script>
 </head>
 <body>
 
@@ -41,7 +46,7 @@
                         <a href="@Url.Action("Index", "Example")">Home</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Portfolio", "Example")">Projects</a>
+                        <a href="@Url.Action("Portfolio", "Example")">Portfolio</a>
                     </li>
                     <li>
                         <a href="@Url.Action("Contact", "Example")">Contact</a>
@@ -55,7 +60,7 @@
 
     <!-- Page Header -->
     <!-- Set your wide, 398px tall background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: @(Page.TitleBg ?? "linear-gradient(#0085a1, #fed)")">
+    <header class="intro-header" style="background: #0085a1; background-image: @(Page.TitleBg ?? "linear-gradient(to bottom, #0085a1 0%,#0085a1 97%,#007589 100%)")">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -74,9 +79,7 @@
 
     <!-- Main Content -->
     <div class="container">
-        <div class="row">
-            @RenderBody()
-        </div>
+        @RenderBody()
     </div>
 
     <hr>
@@ -112,14 +115,10 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; My Flip Site @DateTime.Now.Year</p>
+                    <p class="copyright text-muted">Copyright &copy; Clean Blog Example @DateTime.Now.Year</p>
                 </div>
             </div>
         </div>
     </footer>
-
-    <script src="~/static/jquery-2.1.4/jquery-2.1.4.min.js"></script>
-    <script src="~/static/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-    <script src="~/static/clean-blog-1.0.3/js/clean-blog.min.js"></script>
 </body>
 </html>
