@@ -1,0 +1,23 @@
+﻿@model BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Models.ChangeEmailFromKeyInputModel
+
+@{
+    Page.Title = "Confirm Email";
+}
+
+<h1>@Page.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("Error")
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>@Page.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button>Confirm Email</button>
+        </div>
+    </fieldset>
+}

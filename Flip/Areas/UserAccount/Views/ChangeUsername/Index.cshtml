@@ -1,0 +1,22 @@
+﻿@model BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Models.ChangeUsernameInputModel
+@{
+    Page.Title = "Change Username";
+}
+
+<h1>@Page.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("Error")
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>@Page.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button>Change Username</button>
+        </div>
+    </fieldset>
+}

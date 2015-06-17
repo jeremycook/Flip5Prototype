@@ -5,8 +5,11 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using BrockAllen.MembershipReboot.Owin;
 using Flip.Areas.Core;
+using Flip.Areas.UserAccount;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 [assembly: OwinStartup(typeof(Flip.Startup))]
@@ -17,8 +20,6 @@ namespace Flip
     {
         public static void Configuration(IAppBuilder app)
         {
-            var builder = new ContainerBuilder();
-
             // STANDARD MVC SETUP:
             System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
             ViewEngines.Engines.Clear();
@@ -26,6 +27,8 @@ namespace Flip
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
             RegisterBundles(BundleTable.Bundles);
+
+            var builder = new ContainerBuilder();
 
             // Register your MVC controllers.
             builder.RegisterControllers(typeof(Startup).Assembly);
@@ -46,6 +49,10 @@ namespace Flip
             // OPTIONAL: Enable property injection into action filters.
             builder.RegisterFilterProvider();
 
+            // AUTOFAC MODULES:
+
+            builder.RegisterModule(new UserAccountModule(MembershipRebootOwinConstants.AuthenticationType, app));
+
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
@@ -55,6 +62,13 @@ namespace Flip
             // Register the Autofac middleware FIRST, then the Autofac MVC middleware.
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
+
+            // EVERYTHING ELSE:
+
+            app.UseMembershipReboot(new CookieAuthenticationOptions
+            {
+                AuthenticationType = MembershipRebootOwinConstants.AuthenticationType,
+            });
         }
 
         private static void RegisterBundles(BundleCollection bundles)
