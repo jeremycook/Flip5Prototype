@@ -1,7 +1,8 @@
 /*!
- * Clean Blog v1.0.0 (http://startbootstrap.com)
+ * Clean Blog (http://startbootstrap.com)
  * Copyright 2014 Start Bootstrap
  * Licensed under Apache 2.0 (https://github.com/IronSummitMedia/startbootstrap/blob/gh-pages/LICENSE)
+ * Customized by Jeremy Cook (jeremycook.co@gmail.com)
  */
 
 body {
@@ -340,7 +341,7 @@ form .row:first-child .floating-label-form-group {
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: #0085a1;
+  background: #0085a1;
   border: 1px solid #0085a1;
   color: white;
 }

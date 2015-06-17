@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -19,6 +20,7 @@ namespace Flip
             var builder = new ContainerBuilder();
 
             // STANDARD MVC SETUP:
+            System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new FlipRazorViewEngine());
             RegisterGlobalFilters(GlobalFilters.Filters);
