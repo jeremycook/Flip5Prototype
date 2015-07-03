@@ -5,7 +5,7 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Models
     public class LoginInputModel
     {
         [Required]
-        [Display(Name="Username or Email")]
+        [Display(Name = "Username/\u200BEmail")]
         public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]

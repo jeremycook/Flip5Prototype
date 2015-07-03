@@ -1,0 +1,35 @@
+﻿@{
+    foreach (var prop in this.ViewData.ModelMetadata.Properties)
+    {
+        if (prop.ShowForEdit)
+        {
+            if (prop.TemplateHint == "HiddenInput")
+            {
+                @Html.Hidden(prop.PropertyName)
+            }
+            else if (prop.IsReadOnly)
+            {
+                <div class="form-group">
+                    @Html.Label(prop.PropertyName, htmlAttributes: new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-9">
+                        <div class="form-control-static">
+                            @Html.Display(prop.PropertyName)
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">
+                    @Html.Label(prop.PropertyName, htmlAttributes: new { @class = "control-label col-sm-3" })
+                    <div class="col-sm-5 col-lg-4">
+                        @Html.Editor(prop.PropertyName)
+                    </div>
+                    <div class="col-sm-4 col-lg-5">
+                        @Html.ValidationMessage(prop.PropertyName)
+                    </div>
+                </div>
+            }
+        }
+    }
+}

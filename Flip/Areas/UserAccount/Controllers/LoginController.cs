@@ -20,11 +20,11 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
             this.authSvc = authSvc;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl = null)
         {
-            return View(new LoginInputModel());
+            return View(new LoginInputModel { ReturnUrl = returnUrl });
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(LoginInputModel model)
@@ -59,17 +59,17 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
                         // so what you do here depends on your app and how you want to define the semantics
                         // of the RequiresPasswordReset property
                     }
-                    
+
                     if (userAccountService.IsPasswordExpired(account))
                     {
                         return RedirectToAction("Index", "ChangePassword");
                     }
-                    
+
                     if (Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
-                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -133,7 +133,7 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
                     }
                 }
             }
-            
+
             if (button == "resend")
             {
                 ModelState.Clear();
@@ -145,8 +145,8 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
 
         public ActionResult CertificateLogin()
         {
-            if (Request.ClientCertificate != null && 
-                Request.ClientCertificate.IsPresent && 
+            if (Request.ClientCertificate != null &&
+                Request.ClientCertificate.IsPresent &&
                 Request.ClientCertificate.IsValid)
             {
                 try
@@ -189,7 +189,7 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
                     ModelState.AddModelError("", ex.Message);
                 }
             }
-            
+
             return View();
         }
     }

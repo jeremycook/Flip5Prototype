@@ -3,32 +3,15 @@
     Page.Title = "Change Email";
 }
 
-<h1>@Page.Title</h1>
-
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary("Error")
+<form action="" method="post" class="form-horizontal">
+    @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
 
-    <fieldset>
-        <legend>@Page.Title</legend>
+    @Html.EditorForModel()
 
-        @Html.EditorForModel()
-
-        <div class="buttons">
-            <button>Change Email</button>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-primary">Change Email</button>
         </div>
-    </fieldset>
-}
-
-@using (Html.BeginForm("Confirm", "ChangeEmail", FormMethod.Get))
-{
-    <fieldset>
-        <legend>Confirm</legend>
-        <p>
-            <label for="id">Key</label>
-            <input id="id" name="id" />
-        </p>
-        <p class="buttons"><button>Submit</button></p>
-    </fieldset>
-}
+    </div>
+</form>

@@ -1,16 +1,44 @@
 ﻿@model BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Models.RegisterInputModel
 
-@if (!BrockAllen.MembershipReboot.SecuritySettings.Instance.EmailIsUsername)
+@if (!Model.EmailIsUsername)
 {
-    <div>
-        @Html.LabelFor(x=>x.Username)
-        @Html.EditorFor(x=>x.Username)    
-        @Html.ValidationMessageFor(x=>x.Username)
+    <div class="form-group">
+        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-sm-3" })
+        <div class="col-sm-5 col-lg-4">
+            @Html.EditorFor(model => model.Username)
+        </div>
+        <div class="col-sm-4 col-lg-5">
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
     </div>
 }
-@{
-    var thisPath = Path.GetDirectoryName(this.VirtualPath);
-    var partial = "Object.cshtml";
-    var path = Path.Combine(thisPath, partial);
-}
-@Html.Partial(path, Model)
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-sm-3" })
+    <div class="col-sm-5 col-lg-4">
+        @Html.EditorFor(model => model.Email)
+    </div>
+    <div class="col-sm-4 col-lg-5">
+        @Html.ValidationMessageFor(model => model.Email)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-sm-3" })
+    <div class="col-sm-5 col-lg-4">
+        @Html.EditorFor(model => model.Password)
+    </div>
+    <div class="col-sm-4 col-lg-5">
+        @Html.ValidationMessageFor(model => model.Password)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-sm-3" })
+    <div class="col-sm-5 col-lg-4">
+        @Html.EditorFor(model => model.ConfirmPassword)
+    </div>
+    <div class="col-sm-4 col-lg-5">
+        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+    </div>
+</div>

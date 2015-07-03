@@ -384,6 +384,18 @@ form .row:first-child .floating-label-form-group {
     border-top: 1px solid #eeeeee;
 }
 
+.validation-summary-errors {
+    color: #a94442;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.field-validation-error {
+    color: #a94442;
+}
+
 .btn {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-transform: uppercase;
@@ -391,7 +403,8 @@ form .row:first-child .floating-label-form-group {
     font-weight: 800;
     letter-spacing: 1px;
     border-radius: 0;
-    padding: 15px 25px;
+    padding: 10px 15px;
+    text-decoration: none;
 }
 
 .btn-lg {

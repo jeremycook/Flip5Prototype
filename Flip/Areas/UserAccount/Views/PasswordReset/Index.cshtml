@@ -3,31 +3,15 @@
     Page.Title = "Reset Password";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary("Please correct the following errors")
+<form action="" method="post" class="form-horizontal">
+    @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
 
-    <fieldset class="editor small">
-        <legend>@Page.Title</legend>
+    @Html.EditorForModel()
 
-        @Html.EditorForModel()
-
-        <div class="buttons">
-            <button>Submit</button>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button class="btn btn-primary">Request Password Reset Link</button>
         </div>
-
-    </fieldset>
-}
-
-@using (Html.BeginForm("Confirm", "PasswordReset", FormMethod.Get))
-{
-    <fieldset>
-        <legend>Confirm</legend>
-        <p>
-            <label for="id">Key</label>
-            <input id="id" name="id" />
-        </p>
-        <p class="buttons"><button>Submit</button></p>
-    </fieldset>
-}
+    </div>
+</form>

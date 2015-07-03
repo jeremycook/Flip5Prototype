@@ -1,20 +1,16 @@
 ﻿@{
-    Page.Title = "Index";
+    Page.Title = "Close My Account";
 }
 
-<h2>Close Account</h2>
-@using (Html.BeginForm())
-{
-    @Html.ValidationSummary("Errors")
+<form action="" method="post" class="form-horizontal">
+    @Html.ValidationSummary(true)
     @Html.AntiForgeryToken()
-    
-    <fieldset>
-        <legend>Close Account</legend>
-        <p>
-            Are you sure you want to close your account?
-        </p>
-        <div class="buttons">
-            <button value="yes" name="button">Yes, Close Account</button>
-        </div>
-    </fieldset>
-}
+
+    <p>
+        Are you sure you want to close your account? <strong>This action cannot be undone.</strong>
+    </p>
+
+    <p>
+        <button class="btn btn-danger">Yes, Close Account</button>
+    </p>
+</form>

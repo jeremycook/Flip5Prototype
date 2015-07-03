@@ -16,6 +16,8 @@ namespace Flip.Areas.Core
                 "~/Areas/App/Views/Shared/{0}.cshtml",
                 "~/Areas/{2}/Views/{1}/{0}.cshtml",
                 "~/Areas/{2}/Views/Shared/{0}.cshtml",
+                "~/Areas/Core/Views/{1}/{0}.cshtml",
+                "~/Areas/Core/Views/Shared/{0}.cshtml",
             };
             AreaMasterLocationFormats = new[]
             {
@@ -23,26 +25,37 @@ namespace Flip.Areas.Core
                 "~/Areas/App/Views/Shared/{0}.cshtml",
                 "~/Areas/{2}/Views/{1}/{0}.cshtml",
                 "~/Areas/{2}/Views/Shared/{0}.cshtml",
+                "~/Areas/Core/Views/{1}/{0}.cshtml",
+                "~/Areas/Core/Views/Shared/{0}.cshtml",
             };
             AreaPartialViewLocationFormats = new[]
             {
                 "~/Areas/App/Views/{1}/{0}.cshtml",
+                "~/Areas/App/Views/Shared/{0}.cshtml",
                 "~/Areas/{2}/Views/{1}/{0}.cshtml",
                 "~/Areas/{2}/Views/Shared/{0}.cshtml",
+                "~/Areas/Core/Views/{1}/{0}.cshtml",
+                "~/Areas/Core/Views/Shared/{0}.cshtml",
             };
 
             ViewLocationFormats = new[]
             {
+                "~/Areas/App/Views/{1}/{0}.cshtml",
+                "~/Areas/App/Views/Shared/{0}.cshtml",
                 "~/Areas/Core/Views/{1}/{0}.cshtml",
                 "~/Areas/Core/Views/Shared/{0}.cshtml",
             };
             MasterLocationFormats = new[]
             {
+                "~/Areas/App/Views/{1}/{0}.cshtml",
+                "~/Areas/App/Views/Shared/{0}.cshtml",
                 "~/Areas/Core/Views/{1}/{0}.cshtml",
                 "~/Areas/Core/Views/Shared/{0}.cshtml",
             };
             PartialViewLocationFormats = new[]
             {
+                "~/Areas/App/Views/{1}/{0}.cshtml",
+                "~/Areas/App/Views/Shared/{0}.cshtml",
                 "~/Areas/Core/Views/{1}/{0}.cshtml",
                 "~/Areas/Core/Views/Shared/{0}.cshtml",
             };

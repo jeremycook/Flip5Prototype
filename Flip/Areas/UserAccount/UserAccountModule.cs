@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web;
 using Autofac;
 using BrockAllen.MembershipReboot;
@@ -9,6 +10,8 @@ using BrockAllen.MembershipReboot.Ef;
 using BrockAllen.MembershipReboot.Owin;
 using BrockAllen.MembershipReboot.Relational;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Owin;
 
 namespace Flip.Areas.UserAccount
@@ -19,6 +22,16 @@ namespace Flip.Areas.UserAccount
         {
             this.AuthenticationType = authenticationType;
             this.OwinAppBuilder = owinAppBuilder;
+
+            System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+
+            ConfigureAdditionalIdentityProviders(owinAppBuilder, "External");
+
+            this.OwinAppBuilder.UseMembershipReboot(new CookieAuthenticationOptions
+            {
+                AuthenticationType = MembershipRebootOwinConstants.AuthenticationType,
+                LoginPath = new PathString("/useraccount/login"),
+            });
         }
 
         /// <summary>
@@ -73,6 +86,36 @@ namespace Flip.Areas.UserAccount
             })
             .As<AuthenticationService>()
             .InstancePerLifetimeScope();
+        }
+
+        public static void ConfigureAdditionalIdentityProviders(IAppBuilder app, string signInAsType)
+        {
+            //var google = new GoogleOAuth2AuthenticationOptions
+            //{
+            //    AuthenticationType = "Google",
+            //    SignInAsAuthenticationType = signInAsType,
+            //    ClientId = "...",
+            //    ClientSecret = "...",
+            //};
+            //app.UseGoogleAuthentication(google);
+
+            //var fb = new FacebookAuthenticationOptions
+            //{
+            //    AuthenticationType = "Facebook",
+            //    SignInAsAuthenticationType = signInAsType,
+            //    AppId = "...",
+            //    AppSecret = "...",
+            //};
+            //app.UseFacebookAuthentication(fb);
+
+            //var twitter = new TwitterAuthenticationOptions
+            //{
+            //    AuthenticationType = "Twitter",
+            //    SignInAsAuthenticationType = signInAsType,
+            //    ConsumerKey = "...",
+            //    ConsumerSecret = "...",
+            //};
+            //app.UseTwitterAuthentication(twitter);
         }
 
         private static MembershipRebootConfiguration CreateMembershipRebootConfiguration(IAppBuilder app)

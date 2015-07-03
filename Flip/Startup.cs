@@ -20,78 +20,20 @@ namespace Flip
     {
         public static void Configuration(IAppBuilder app)
         {
-            // STANDARD MVC SETUP:
-            System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new FlipRazorViewEngine());
-            RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
-            RegisterBundles(BundleTable.Bundles);
-
             var builder = new ContainerBuilder();
 
-            // Register your MVC controllers.
-            builder.RegisterControllers(typeof(Startup).Assembly);
-
-            // Run other optional steps, like registering model binders,
-            // web abstractions, etc., 
-
-            // OPTIONAL: Register model binders that require DI.
-            builder.RegisterModelBinders(typeof(Startup).Assembly);
-            builder.RegisterModelBinderProvider();
-
-            // OPTIONAL: Register web abstractions like HttpContextBase.
-            builder.RegisterModule<AutofacWebTypesModule>();
-
-            // OPTIONAL: Enable property injection in view pages.
-            builder.RegisterSource(new ViewRegistrationSource());
-
-            // OPTIONAL: Enable property injection into action filters.
-            builder.RegisterFilterProvider();
-
-            // AUTOFAC MODULES:
-
+            // Autofac modules:
+            builder.RegisterModule(new CoreModule());
             builder.RegisterModule(new UserAccountModule(MembershipRebootOwinConstants.AuthenticationType, app));
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            // OWIN MVC SETUP:
-
+            // OWIN MVC setup:
             // Register the Autofac middleware FIRST, then the Autofac MVC middleware.
             app.UseAutofacMiddleware(container);
             app.UseAutofacMvc();
-
-            // EVERYTHING ELSE:
-
-            app.UseMembershipReboot(new CookieAuthenticationOptions
-            {
-                AuthenticationType = MembershipRebootOwinConstants.AuthenticationType,
-            });
-        }
-
-        private static void RegisterBundles(BundleCollection bundles)
-        {
-        }
-
-        private static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.LowercaseUrls = true;
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.MapMvcAttributeRoutes();
-            AreaRegistration.RegisterAllAreas();
-            // TODO: Specify default page
-            routes.MapRoute(
-                name: "Default",
-                url: "",
-                defaults: new { action = "Index", controller = "Default", area = "App" }
-            );
-        }
-
-        private static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new HandleErrorAttribute());
         }
     }
 }

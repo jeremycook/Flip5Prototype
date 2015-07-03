@@ -8,23 +8,23 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
     public class RegisterController : Controller
     {
         UserAccountService userAccountService;
-        AuthenticationService authSvc;
 
-        public RegisterController(AuthenticationService authSvc)
+        public RegisterController(UserAccountService userAccountService)
         {
-            this.authSvc = authSvc;
-            this.userAccountService = authSvc.UserAccountService;
+            this.userAccountService = userAccountService;
         }
 
         public ActionResult Index()
         {
-            return View(new RegisterInputModel());
+            return View(new RegisterInputModel { EmailIsUsername = userAccountService.Configuration.EmailIsUsername });
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Index(RegisterInputModel model)
         {
+            model.EmailIsUsername = userAccountService.Configuration.EmailIsUsername;
+
             if (ModelState.IsValid)
             {
                 try
@@ -77,7 +77,7 @@ namespace BrockAllen.MembershipReboot.Mvc.Areas.UserAccount.Controllers
                     return View("Cancel");
                 }
             }
-            catch(ValidationException ex)
+            catch (ValidationException ex)
             {
                 ModelState.AddModelError("", ex.Message);
             }

@@ -113,15 +113,15 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
         } else if (!property.IsReadOnly) {
 #>
     <div class="form-group">
-        @Html.LabelFor(model => model.<#= property.PropertyName #>, htmlAttributes: new { @class = "control-label col-sm-2" })
-        <div class="col-sm-4 col-md-3">
+        @Html.LabelFor(model => model.<#= property.PropertyName #>, htmlAttributes: new { @class = "control-label col-sm-3" })
+        <div class="col-sm-5 col-lg-4">
             @Html.EditorFor(model => model.<#= property.PropertyName #>)
         </div>
-        <div class="col-sm-6 col-md-7">
+        <div class="col-sm-4 col-lg-5">
 <# 
             if (isControlHtmlAttributesSupported) {
 #>
-            @Html.ValidationMessageFor(model => model.<#= property.PropertyName #>, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.<#= property.PropertyName #>)
 <#        
             } else {
 #>
@@ -143,7 +143,7 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 }
 #>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-3 col-sm-9">
             <button type="submit" class="btn btn-primary">Save Changes</button>
             <a href="@Url.Action("Index")" class="btn btn-default">Return to List</a>
             <a href="@Url.Action("Details", new { id = Model.<#= (GetPrimaryKeyName() ?? "PrimaryKey") #> })" class="btn btn-default">View</a>
